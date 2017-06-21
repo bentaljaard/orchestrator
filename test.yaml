@@ -1,0 +1,25 @@
+name: GetWeatherForCountryCapital
+tasks:
+  - getCountry:
+      type: service
+      method: GET
+      endpoint: https://restcountries.p.mashape.com
+      headers:
+        - X-Mashape-Key: bcNJS9g6iRmshvGECjLs4OHFU4dap1lZy6jjsnVaF5wCnhCrvA
+        - Accept: application/json
+      request_transform:
+        type: parameters
+        file: getCountryRequest.map
+  - getWeather:
+      type: service
+      method: GET
+      endpoint: http://api.openweathermap.org/data/2.5
+      headers: 
+        - Accept: application/json
+      request_transform:
+        type: parameters
+        file: getWeatherRequest.map
+  - temp:
+      type: map
+      map_type: json
+      file: temp.map
